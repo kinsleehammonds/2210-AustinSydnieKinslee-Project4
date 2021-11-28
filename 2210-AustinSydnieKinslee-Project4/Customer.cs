@@ -10,14 +10,15 @@ namespace _2210_AustinSydnieKinslee_Project4
         public int ArrivalTime { get; set; }
         public int TimeToBeServed { get; set; }
 
-        public Customer()
+        public Customer(int openTime, int closeTime)
         {
+             
             DecideTimes();
         }
 
-        public void DecideTimes()
+        public void DecideTimes(int timeOpen)
         {
-            ArrivalTime = rand.Next(57601) + 28800;
+            ArrivalTime = rand.Next(secondsOpen) + 28800;
             TimeToBeServed = Convert.ToInt32(NegExp(345 - 120));
 
         }
