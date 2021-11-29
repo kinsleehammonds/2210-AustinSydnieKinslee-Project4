@@ -12,7 +12,6 @@ namespace _2210_AustinSydnieKinslee_Project4
 
         public Customer(int openTime, int closeTime)
         {
-             
             DecideTimes();
         }
 
