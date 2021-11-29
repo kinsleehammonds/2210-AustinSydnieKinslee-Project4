@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// khgkhhk
+/// </summary>
 namespace DataStructuresProject4
 {
     enum EVENTTYPE { ENTER, LEAVE };
@@ -19,6 +22,7 @@ namespace DataStructuresProject4
             Time = DateTime.Now;
             Customer = -1;
         }
+   
 
         public Event(EVENTTYPE type, DateTime time, int customer)
         {
@@ -27,6 +31,10 @@ namespace DataStructuresProject4
             Customer = customer;
         }
 
+        public Event(int weird)
+        {
+
+        }
         public override string ToString()
         {
             return string.Format("Customer {0} {1}s at {2}", Customer, Type, Time);
