@@ -9,9 +9,18 @@ namespace _2210_AustinSydnieKinslee_Project4
         Random rand = new Random();
         public int ArrivalTime { get; set; }
         public int TimeToBeServed { get; set; }
+        public int RegisterNumber { get; set; }
+        public int HoursOpen { get; set; }
 
-        public Customer(int openTime, int closeTime)
+        public Customer()
         {
+            RegisterNumber = -1;
+            HoursOpen = 8;
+            DecideTimes();
+        }
+        public Customer(int hoursOpen, double E)
+        {
+            HoursOpen = hoursOpen;
             DecideTimes();
         }
 
