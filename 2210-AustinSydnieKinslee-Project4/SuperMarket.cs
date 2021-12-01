@@ -116,9 +116,10 @@ namespace _2210_AustinSydnieKinslee_Project4
             Console.Clear();
             for(int i = 0; i < lines.Count; i++)
             {
-                Console.WriteLine("Line {0}: ", i + 1);
+                Console.Write("Line {0}: ", i + 1);
                 foreach (Customer c in lines[i])
                     Console.Write(c.ID + " ");
+                Console.WriteLine();
             }
             Console.WriteLine("Min: {0}, Max: {1}", Min, Max);
         }
