@@ -8,6 +8,8 @@ namespace _2210_AustinSydnieKinslee_Project4
     {
         public double Min { get; set; }
         public double Max { get; set; }
+        public bool Flag { get; set; }
+        public int NumOfCustomers { get; set; }
 
         public double Average { get; set; }
 
@@ -15,15 +17,16 @@ namespace _2210_AustinSydnieKinslee_Project4
         List<Queue<Customer>> lines = new List<Queue<Customer>>();
         PriorityQueue<Event> events = new PriorityQueue<Event>();
 
-        public int openTime { get; set; }
+        public int OpenTime { get; set; }
 
-        public int closeTime { get; set; }
+        public int CloseTime { get; set; }
 
         public SuperMarket()
         {
             Min = 0;
             Max = 0;
             Average = 0;
+            Flag = false;
 
         }
 
@@ -32,11 +35,15 @@ namespace _2210_AustinSydnieKinslee_Project4
             Min = 0;
             Max = 0;
             Average = 0;
+            Flag = false;
+            NumOfCustomers = numOfCustomers;
+            OpenTime = openTime;
+            CloseTime = closeTime;
         }
 
-        public void GenerateCustomers(int numOfCustomers)
+        public void GenerateCustomers()
         {
-            for(int i = 0; i < numOfCustomers; i++)
+            for(int i = 0; i < NumOfCustomers; i++)
             {
                 Customer newCustomer = new Customer(openTime, closeTime, i + 1);
 
@@ -70,6 +77,9 @@ namespace _2210_AustinSydnieKinslee_Project4
 
                 lines[line].Enqueue(e.Customer);
                 e.Customer.RegisterNumber = line;
+
+                if (lines[line].Count > 2)
+                    Flag = true;
             }
             else
             {
