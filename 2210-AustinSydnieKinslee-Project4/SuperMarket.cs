@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace _2210_AustinSydnieKinslee_Project4
 {
@@ -11,15 +12,15 @@ namespace _2210_AustinSydnieKinslee_Project4
         public bool Flag { get; set; }
         public int NumOfCustomers { get; set; }
 
+        public double HoursOpen { get; set; }
+
+        public double ExpectedTimeToBeServed { get; set; }
+
         public double Average { get; set; }
 
         List<Customer> customers = new List<Customer>();
         List<Queue<Customer>> lines = new List<Queue<Customer>>();
         PriorityQueue<Event> events = new PriorityQueue<Event>();
-
-        public int OpenTime { get; set; }
-
-        public int CloseTime { get; set; }
 
         public SuperMarket()
         {
@@ -27,25 +28,30 @@ namespace _2210_AustinSydnieKinslee_Project4
             Max = 0;
             Average = 0;
             Flag = false;
+            NumOfCustomers = 20;
+            ExpectedTimeToBeServed = 4.5;
+            HoursOpen = 16;
+
+            for (int i = 0; i < 4; i++)
+                lines.Add(new Queue<Customer>());
 
         }
 
-        public SuperMarket(int numOfCustomers, int openTime, int closeTime)
+        public SuperMarket(int numOfCustomers, double hoursOpen)
         {
             Min = 0;
             Max = 0;
             Average = 0;
             Flag = false;
             NumOfCustomers = numOfCustomers;
-            OpenTime = openTime;
-            CloseTime = closeTime;
+            HoursOpen = hoursOpen;
         }
 
         public void GenerateCustomers()
         {
             for(int i = 0; i < NumOfCustomers; i++)
             {
-                Customer newCustomer = new Customer(openTime, closeTime, i + 1);
+                Customer newCustomer = new Customer(HoursOpen, ExpectedTimeToBeServed, i + 1);
 
                 customers.Add(newCustomer);
             }
@@ -80,21 +86,41 @@ namespace _2210_AustinSydnieKinslee_Project4
 
                 if (lines[line].Count > 2)
                     Flag = true;
+
+
             }
             else
             {
                 if(lines[e.Customer.RegisterNumber].Count == 1)
                 {
-                    lines[e.Customer.RegisterNumber].Dequeue();
+                    Customer lineCustomer = lines[e.Customer.RegisterNumber].Dequeue();
+
+                    if (Min == 0)
+                        Min = lineCustomer.TimeToBeServed;
+                    else if (lineCustomer.TimeToBeServed < Min)
+                        Min = lineCustomer.TimeToBeServed;
+
+                    if (Max == 0)
+                        Max = lineCustomer.TimeToBeServed;
+                    else if (lineCustomer.TimeToBeServed > Max)
+                        Max = lineCustomer.TimeToBeServed;
+
+                    Average += lineCustomer.TimeToBeServed;
                 }
                 else if(lines[e.Customer.RegisterNumber].Count > 1)
                 {
                     Customer lineCustomer = lines[e.Customer.RegisterNumber].Dequeue();
 
-                    if (lineCustomer.TimeToBeServed < Min)
+                    if (Min == 0)
                         Min = lineCustomer.TimeToBeServed;
-                    if (lineCustomer.TimeToBeServed > Max)
+                    else if (lineCustomer.TimeToBeServed < Min)
+                        Min = lineCustomer.TimeToBeServed;
+
+                    if (Max == 0)
                         Max = lineCustomer.TimeToBeServed;
+                    else if (lineCustomer.TimeToBeServed > Max)
+                        Max = lineCustomer.TimeToBeServed;
+
                     Average += lineCustomer.TimeToBeServed;
 
                     lines[e.Customer.RegisterNumber].Peek().TimeToBeServed += lineCustomer.TimeToBeServed;
@@ -103,9 +129,37 @@ namespace _2210_AustinSydnieKinslee_Project4
             }
         }
 
+        public void PrintSupermarket()
+        {
+            Console.Clear();
+            for(int i = 0; i < lines.Count; i++)
+            {
+                Console.Write("Line {0}: ", i + 1);
+                foreach (Customer c in lines[i])
+                    Console.Write(c.ID + " ");
+                Console.WriteLine();
+            }
+            Console.WriteLine("Min: {0}, Max: {1}", Min, Max);
+        }
+
         public void RunSuperMarket()
         {
+            GenerateCustomers();
+            AddEvents();
 
+            while(events.Count > 1)
+            {
+                HandleEvent(events.Peek());
+                events.Dequeue();
+                PrintSupermarket();
+
+                Thread.Sleep(100);
+            }
+
+            Average /= customers.Count;
+
+            Console.WriteLine("Average: {0}, Did lines exceed 2: {1}", Average, Flag);
+            Console.ReadKey();
         }
 
 

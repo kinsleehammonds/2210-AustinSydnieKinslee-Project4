@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 /// </summary>
 namespace _2210_AustinSydnieKinslee_Project4
 {
-    enum EVENTTYPE { ENTER, LEAVE };
+    public enum EVENTTYPE { ENTER, LEAVE };
 
     public class Event : IComparable
     {

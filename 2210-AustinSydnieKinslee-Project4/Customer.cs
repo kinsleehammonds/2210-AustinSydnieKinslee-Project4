@@ -6,7 +6,7 @@ namespace _2210_AustinSydnieKinslee_Project4
 {
     public class Customer
     {
-        Random rand = new Random();
+        private static Random rand = new Random();
 
         public int ID { get; set; }
         public int ArrivalTime { get; set; }
@@ -35,16 +35,15 @@ namespace _2210_AustinSydnieKinslee_Project4
         {
             if(HoursOpen < 24)
             {
-                int secondsOpen = HoursOpen * 3600;
-                int secondsExpectedTimeToBeServed = ExpectedTimeToBeServed * 60;
+                int secondsOpen = Convert.ToInt32(HoursOpen * 3600);
+                int secondsExpectedTimeToBeServed = Convert.ToInt32(ExpectedTimeToBeServed * 60);
                 ArrivalTime = rand.Next(secondsOpen) + 28800; //assume in all situations that the store opens at 8 am. 
                 TimeToBeServed = Convert.ToInt32(NegExp(secondsExpectedTimeToBeServed - 120) + 120) ;
             }
             else
-            {
-                MessageBox.Show("The store cannot be open for more than 24 hours. Please enter a new amount of hours open.");
-            }
-
+                throw new Exception("The store cannot be open for more than 24 hours. Please enter a new amount of hours open.");
+                
+          
         }
 
         private Double NegExp(int ExpectedValue)
