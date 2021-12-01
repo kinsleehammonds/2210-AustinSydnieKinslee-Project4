@@ -28,8 +28,12 @@ namespace _2210_AustinSydnieKinslee_Project4
             Max = 0;
             Average = 0;
             Flag = false;
-            NumOfCustomers = 200;
+            NumOfCustomers = 20;
+            ExpectedTimeToBeServed = 4.5;
             HoursOpen = 16;
+
+            for (int i = 0; i < 4; i++)
+                lines.Add(new Queue<Customer>());
 
         }
 
@@ -82,12 +86,26 @@ namespace _2210_AustinSydnieKinslee_Project4
 
                 if (lines[line].Count > 2)
                     Flag = true;
+
+
             }
             else
             {
                 if(lines[e.Customer.RegisterNumber].Count == 1)
                 {
-                    lines[e.Customer.RegisterNumber].Dequeue();
+                    Customer lineCustomer = lines[e.Customer.RegisterNumber].Dequeue();
+
+                    if (Min == 0)
+                        Min = lineCustomer.TimeToBeServed;
+                    else if (lineCustomer.TimeToBeServed < Min)
+                        Min = lineCustomer.TimeToBeServed;
+
+                    if (Max == 0)
+                        Max = lineCustomer.TimeToBeServed;
+                    else if (lineCustomer.TimeToBeServed > Max)
+                        Max = lineCustomer.TimeToBeServed;
+
+                    Average += lineCustomer.TimeToBeServed;
                 }
                 else if(lines[e.Customer.RegisterNumber].Count > 1)
                 {
@@ -129,17 +147,19 @@ namespace _2210_AustinSydnieKinslee_Project4
             GenerateCustomers();
             AddEvents();
 
-            while(events.Count > 0)
+            while(events.Count > 1)
             {
-                HandleEvent(events.Dequeue());
+                HandleEvent(events.Peek());
+                events.Dequeue();
                 PrintSupermarket();
 
-                Thread.Sleep(500);
+                Thread.Sleep(100);
             }
 
             Average /= customers.Count;
 
             Console.WriteLine("Average: {0}, Did lines exceed 2: {1}", Average, Flag);
+            Console.ReadKey();
         }
 
 

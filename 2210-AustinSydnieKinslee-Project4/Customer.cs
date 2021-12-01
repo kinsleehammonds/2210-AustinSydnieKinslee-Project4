@@ -6,7 +6,7 @@ namespace _2210_AustinSydnieKinslee_Project4
 {
     public class Customer
     {
-        Random rand = new Random();
+        private static Random rand = new Random();
 
         public int ID { get; set; }
         public int ArrivalTime { get; set; }

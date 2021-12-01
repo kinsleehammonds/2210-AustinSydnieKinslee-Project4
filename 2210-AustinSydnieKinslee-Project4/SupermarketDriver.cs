@@ -21,6 +21,8 @@ namespace _2210_AustinSydnieKinslee_Project4
                         break;
                 }
 
+                choice = menu.GetChoice();
+
             }
         }
     }
