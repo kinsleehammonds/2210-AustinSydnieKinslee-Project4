@@ -36,7 +36,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             if(HoursOpen < 24)
             {
                 int secondsOpen = HoursOpen * 3600;
-                int secondsExpectedTimeToBeServed = ExpectedTimeToBeServed * 3600;
+                int secondsExpectedTimeToBeServed = ExpectedTimeToBeServed * 60;
                 ArrivalTime = rand.Next(secondsOpen) + 28800; //assume in all situations that the store opens at 8 am. 
                 TimeToBeServed = Convert.ToInt32(NegExp(secondsExpectedTimeToBeServed) + 120) ;
             }
