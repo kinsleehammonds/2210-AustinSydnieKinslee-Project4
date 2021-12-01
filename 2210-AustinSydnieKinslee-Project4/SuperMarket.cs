@@ -8,6 +8,7 @@ namespace _2210_AustinSydnieKinslee_Project4
     {
         public double Min { get; set; }
         public double Max { get; set; }
+        public bool Flag { get; set; }
 
         public double Average { get; set; }
 
@@ -24,6 +25,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             Min = 0;
             Max = 0;
             Average = 0;
+            Flag = false;
 
         }
 
@@ -32,6 +34,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             Min = 0;
             Max = 0;
             Average = 0;
+            Flag = false;
         }
 
         public void GenerateCustomers(int numOfCustomers)
@@ -70,6 +73,9 @@ namespace _2210_AustinSydnieKinslee_Project4
 
                 lines[line].Enqueue(e.Customer);
                 e.Customer.RegisterNumber = line;
+
+                if (lines[line].Count > 2)
+                    Flag = true;
             }
             else
             {
