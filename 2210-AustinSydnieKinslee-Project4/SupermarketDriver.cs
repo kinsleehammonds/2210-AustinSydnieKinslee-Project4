@@ -6,8 +6,9 @@ namespace _2210_AustinSydnieKinslee_Project4
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            Menu mainMenu = new Menu("Supermarket Simulation");
+
+            mainMenu = mainMenu + "Set the number of Registrants" + "Set the number of hours" + "";
         }
     }
 }

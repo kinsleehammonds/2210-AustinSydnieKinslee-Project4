@@ -6,6 +6,11 @@ namespace _2210_AustinSydnieKinslee_Project4
 {
     public class SuperMarket 
     {
+        public double Min { get; set; }
+        public double Max { get; set; }
+
+        public double Average { get; set; }
+
         List<Customer> customers = new List<Customer>();
         List<Queue<Customer>> lines = new List<Queue<Customer>>();
         PriorityQueue<Event> events = new PriorityQueue<Event>();
@@ -16,19 +21,24 @@ namespace _2210_AustinSydnieKinslee_Project4
 
         public SuperMarket()
         {
+            Min = 0;
+            Max = 0;
+            Average = 0;
 
         }
 
         public SuperMarket(int numOfCustomers, int openTime, int closeTime)
         {
-
+            Min = 0;
+            Max = 0;
+            Average = 0;
         }
 
         public void GenerateCustomers(int numOfCustomers)
         {
             for(int i = 0; i < numOfCustomers; i++)
             {
-                Customer newCustomer = new Customer(openTime, closeTime);
+                Customer newCustomer = new Customer(openTime, closeTime, i + 1);
 
                 customers.Add(newCustomer);
             }
@@ -63,9 +73,29 @@ namespace _2210_AustinSydnieKinslee_Project4
             }
             else
             {
-                if(lines[e.Customer.RegisterNumber].Peek() )
+                if(lines[e.Customer.RegisterNumber].Count == 1)
+                {
+                    lines[e.Customer.RegisterNumber].Dequeue();
+                }
+                else if(lines[e.Customer.RegisterNumber].Count > 1)
+                {
+                    Customer lineCustomer = lines[e.Customer.RegisterNumber].Dequeue();
 
+                    if (lineCustomer.TimeToBeServed < Min)
+                        Min = lineCustomer.TimeToBeServed;
+                    if (lineCustomer.TimeToBeServed > Max)
+                        Max = lineCustomer.TimeToBeServed;
+                    Average += lineCustomer.TimeToBeServed;
+
+                    lines[e.Customer.RegisterNumber].Peek().TimeToBeServed += lineCustomer.TimeToBeServed;
+                    
+                }
             }
+        }
+
+        public void RunSuperMarket()
+        {
+
         }
 
 

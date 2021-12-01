@@ -6,4 +6,8 @@
     <RootNamespace>_2210_AustinSydnieKinslee_Project4</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="MenuDemo\" />
+  </ItemGroup>
+
 </Project>
