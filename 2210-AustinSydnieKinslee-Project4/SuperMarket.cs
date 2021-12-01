@@ -39,6 +39,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             Arrivals = 0;
             Departures = 0;
 
+            GenerateCustomers(100);
             for (int i = 0; i < 2; i++)
                 lines.Add(new Queue<Customer>());
 
@@ -53,12 +54,12 @@ namespace _2210_AustinSydnieKinslee_Project4
             Average = 0;
             LongestLine = 0;
             Flag = false;
-            NumOfCustomers = numOfCustomers;
+            GenerateCustomers(numOfCustomers);
             HoursOpen = hoursOpen;
             ExpectedTimeToBeServed = expectedWaitTime;
         }
 
-        public void GenerateCustomers()
+        public void GenerateCustomers(int numOfCustomer)
         {
             for(int i = 0; i < NumOfCustomers; i++)
             {
@@ -165,27 +166,36 @@ namespace _2210_AustinSydnieKinslee_Project4
         public void PrintSupermarket()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Registration Window" +
                  "\n--------------------------------");
             for (int i = 0; i < lines.Count; i++)
             {
-                
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Line {0}: ", i + 1);
+
+                Console.ForegroundColor = ConsoleColor.Red;
                 foreach (Customer c in lines[i])
-                    Console.Write(c.ID + " ");
+                {
+                    if(c.ID < 10)
+                        Console.Write("0" + c.ID + " ");
+                    else
+                        Console.Write(c.ID + " ");
+                }
                 Console.WriteLine();
             }
+
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("--------------------------------");
             Console.WriteLine("Longest Queue Entered So Far: {0}", LongestLine);
-            Console.WriteLine("\n\n\n\tEvents Processed So Far: {0}", Arrivals + Departures);
-            Console.WriteLine("\tArrivals: {0}", Arrivals);
-            Console.WriteLine("\tDepartures: {0}", Departures);
-            //Console.WriteLine("Min: {0}, Max: {1}", ConvertMinutes(Min), ConvertMinutes(Max));
+            Console.WriteLine("\n\n\t\tEvents Processed So Far: {0}", Arrivals + Departures);
+            Console.WriteLine("\t\tArrivals: {0}", Arrivals);
+            Console.WriteLine("\t\tDepartures: {0}", Departures);
+            
         }
 
         public void RunSuperMarket()
         {
-            GenerateCustomers();
             AddEvents();
 
             while(events.Count > 0)
@@ -201,7 +211,8 @@ namespace _2210_AustinSydnieKinslee_Project4
             int avg = Convert.ToInt32(Average);
             
 
-            Console.WriteLine("Average: {0}, Did lines exceed 2: {1}", ConvertMinutes(avg), Flag);
+            Console.WriteLine("\nAverage: {0}, Did lines exceed 2: {1}", ConvertMinutes(avg), Flag);
+            Console.WriteLine("Min: {0}, Max: {1}", ConvertMinutes(Min), ConvertMinutes(Max));
             Console.ReadKey();
         }
 
