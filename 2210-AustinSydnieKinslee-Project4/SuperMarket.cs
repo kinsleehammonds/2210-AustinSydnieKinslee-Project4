@@ -28,6 +28,8 @@ namespace _2210_AustinSydnieKinslee_Project4
             Max = 0;
             Average = 0;
             Flag = false;
+            NumOfCustomers = 200;
+            HoursOpen = 16;
 
         }
 
