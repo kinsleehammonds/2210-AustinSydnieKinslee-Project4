@@ -93,10 +93,16 @@ namespace _2210_AustinSydnieKinslee_Project4
                 {
                     Customer lineCustomer = lines[e.Customer.RegisterNumber].Dequeue();
 
-                    if (lineCustomer.TimeToBeServed < Min)
+                    if (Min == 0)
                         Min = lineCustomer.TimeToBeServed;
-                    if (lineCustomer.TimeToBeServed > Max)
+                    else if (lineCustomer.TimeToBeServed < Min)
+                        Min = lineCustomer.TimeToBeServed;
+
+                    if (Max == 0)
                         Max = lineCustomer.TimeToBeServed;
+                    else if (lineCustomer.TimeToBeServed > Max)
+                        Max = lineCustomer.TimeToBeServed;
+
                     Average += lineCustomer.TimeToBeServed;
 
                     lines[e.Customer.RegisterNumber].Peek().TimeToBeServed += lineCustomer.TimeToBeServed;
