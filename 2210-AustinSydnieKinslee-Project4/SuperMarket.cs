@@ -7,8 +7,8 @@ namespace _2210_AustinSydnieKinslee_Project4
 {
     public class SuperMarket 
     {
-        public double Min { get; set; }
-        public double Max { get; set; }
+        public int Min { get; set; }
+        public int Max { get; set; }
         public bool Flag { get; set; }
         public int NumOfCustomers { get; set; }
 
@@ -28,7 +28,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             Max = 0;
             Average = 0;
             Flag = false;
-            NumOfCustomers = 20;
+            NumOfCustomers = 200;
             ExpectedTimeToBeServed = 4.5;
             HoursOpen = 16;
 
@@ -37,14 +37,17 @@ namespace _2210_AustinSydnieKinslee_Project4
 
         }
 
-        public SuperMarket(int numOfCustomers, double hoursOpen)
+        public SuperMarket(int numOfCustomers, double hoursOpen, int numOfRegisters, double expectedWaitTime)
         {
+            for (int i = 0; i < numOfRegisters; i++)
+                lines.Add(new Queue<Customer>());
             Min = 0;
             Max = 0;
             Average = 0;
             Flag = false;
             NumOfCustomers = numOfCustomers;
             HoursOpen = hoursOpen;
+            ExpectedTimeToBeServed = expectedWaitTime;
         }
 
         public void GenerateCustomers()
@@ -95,15 +98,12 @@ namespace _2210_AustinSydnieKinslee_Project4
                 {
                     Customer lineCustomer = lines[e.Customer.RegisterNumber].Dequeue();
 
-                    if (Min == 0)
-                        Min = lineCustomer.TimeToBeServed;
-                    else if (lineCustomer.TimeToBeServed < Min)
+                    if (Min == 0 || Min > lineCustomer.TimeToBeServed)
                         Min = lineCustomer.TimeToBeServed;
 
-                    if (Max == 0)
+                    if (Max == 0 || lineCustomer.TimeToBeServed > Max)
                         Max = lineCustomer.TimeToBeServed;
-                    else if (lineCustomer.TimeToBeServed > Max)
-                        Max = lineCustomer.TimeToBeServed;
+                
 
                     Average += lineCustomer.TimeToBeServed;
                 }
@@ -111,15 +111,12 @@ namespace _2210_AustinSydnieKinslee_Project4
                 {
                     Customer lineCustomer = lines[e.Customer.RegisterNumber].Dequeue();
 
-                    if (Min == 0)
-                        Min = lineCustomer.TimeToBeServed;
-                    else if (lineCustomer.TimeToBeServed < Min)
+                    if (Min == 0 || Min > lineCustomer.TimeToBeServed)
                         Min = lineCustomer.TimeToBeServed;
 
-                    if (Max == 0)
+                    if (Max == 0 || lineCustomer.TimeToBeServed > Max)
                         Max = lineCustomer.TimeToBeServed;
-                    else if (lineCustomer.TimeToBeServed > Max)
-                        Max = lineCustomer.TimeToBeServed;
+
 
                     Average += lineCustomer.TimeToBeServed;
 
@@ -129,17 +126,44 @@ namespace _2210_AustinSydnieKinslee_Project4
             }
         }
 
+        public string ConvertMinutes(int seconds)
+        {
+            string msg = "";
+
+            int mins = (int)seconds / 60;
+            if (mins < 10)
+                msg += "0" + mins;
+            else
+                msg += mins;
+
+            msg += ":";
+
+            int secs = seconds % 60;
+            if (secs < 10)
+                msg += "0" + secs;
+            else
+                msg += secs;
+
+
+            return msg;
+        }
+
         public void PrintSupermarket()
         {
             Console.Clear();
-            for(int i = 0; i < lines.Count; i++)
+            Console.WriteLine("Registration Window" +
+                 "\n--------------------------------");
+            for (int i = 0; i < lines.Count; i++)
             {
+                
                 Console.Write("Line {0}: ", i + 1);
                 foreach (Customer c in lines[i])
                     Console.Write(c.ID + " ");
                 Console.WriteLine();
             }
-            Console.WriteLine("Min: {0}, Max: {1}", Min, Max);
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("Longest Queue Entered So Far ");
+            Console.WriteLine("Min: {0}, Max: {1}", ConvertMinutes(Min), ConvertMinutes(Max));
         }
 
         public void RunSuperMarket()
@@ -147,7 +171,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             GenerateCustomers();
             AddEvents();
 
-            while(events.Count > 1)
+            while(events.Count > 0)
             {
                 HandleEvent(events.Peek());
                 events.Dequeue();
@@ -157,8 +181,10 @@ namespace _2210_AustinSydnieKinslee_Project4
             }
 
             Average /= customers.Count;
+            int avg = Convert.ToInt32(Average);
+            
 
-            Console.WriteLine("Average: {0}, Did lines exceed 2: {1}", Average, Flag);
+            Console.WriteLine("Average: {0}, Did lines exceed 2: {1}", ConvertMinutes(avg), Flag);
             Console.ReadKey();
         }
 
