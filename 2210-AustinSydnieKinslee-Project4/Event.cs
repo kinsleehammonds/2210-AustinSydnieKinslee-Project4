@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 /// <summary>
 /// khgkhhk
 /// </summary>
-namespace DataStructuresProject4
+namespace _2210_AustinSydnieKinslee_Project4
 {
     enum EVENTTYPE { ENTER, LEAVE };
+
     class Event : IComparable
     {
         public EVENTTYPE Type { get; set; }
