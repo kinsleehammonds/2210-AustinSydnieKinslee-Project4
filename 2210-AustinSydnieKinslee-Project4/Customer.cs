@@ -11,6 +11,7 @@ namespace _2210_AustinSydnieKinslee_Project4
         public int TimeToBeServed { get; set; }
         public int RegisterNumber { get; set; }
         public int HoursOpen { get; set; }
+        public int ExpectedTimeToBeServed { get; set; }
 
         public Customer()
         {
@@ -18,14 +19,16 @@ namespace _2210_AustinSydnieKinslee_Project4
             HoursOpen = 8;
             DecideTimes();
         }
-        public Customer(int hoursOpen, double E)
+        public Customer(double hoursOpen, double expectedTimeToBeServed)
         {
             HoursOpen = hoursOpen;
+            ExpectedTimeToBeServed = expectedTimeToBeServed;
             DecideTimes();
         }
 
-        public void DecideTimes(int timeOpen)
+        public void DecideTimes()
         {
+            int secondsOpen = HoursOpen * 3600
             ArrivalTime = rand.Next(secondsOpen) + 28800;
             TimeToBeServed = Convert.ToInt32(NegExp(345 - 120));
 
