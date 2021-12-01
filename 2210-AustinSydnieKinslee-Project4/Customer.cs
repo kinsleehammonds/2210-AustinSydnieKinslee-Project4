@@ -15,12 +15,14 @@ namespace _2210_AustinSydnieKinslee_Project4
 
         public Customer()
         {
+            ID = -1;
             RegisterNumber = -1;
             HoursOpen = 8;
             DecideTimes();
         }
-        public Customer(double hoursOpen, double expectedTimeToBeServed)
+        public Customer(double hoursOpen, double expectedTimeToBeServed, int id)
         {
+            ID = id;
             HoursOpen = hoursOpen;
             ExpectedTimeToBeServed = expectedTimeToBeServed;
             DecideTimes();
