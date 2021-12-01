@@ -4,7 +4,7 @@ using System.Text;
 
 namespace _2210_AustinSydnieKinslee_Project4
 {
-    public class Customer : IEquatable
+    public class Customer
     {
         Random rand = new Random();
 
@@ -52,26 +52,6 @@ namespace _2210_AustinSydnieKinslee_Project4
 
             return -ExpectedValue * Math.Log(rand.NextDouble(), Math.E);
 
-        }
-
-        public bool Equals(Customer other)
-        {
-            return this.ID.Equals(other.ID);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return base.Equals(obj);
-            if (!(obj is Customer))
-                throw new ArgumentException("");
-
-            return Equals(obj as Customer);
-        }
-
-        public override int GetHashCode()
-        {
-            return ID.GetHashCode();
         }
 
         //it's not a lot but I can't figure out what else it might need
