@@ -54,8 +54,8 @@ namespace _2210_AustinSydnieKinslee_Project4
             
             try
             {
-                NumOfCustomers = Console.ReadLine();
-                if(NumOfCustomers <= 0)
+                NumOfCustomers = Convert.ToInt32(Console.ReadLine());
+                if (NumOfCustomers <= 0)
                 {
                    NumOfCustomers = 0;
                    Console.WriteLine("Invalid Input. Please enter a number greater than 0. ");
@@ -71,11 +71,12 @@ namespace _2210_AustinSydnieKinslee_Project4
         private static void GetHours()
         {
             Console.Clear();
-            Console.WriteLine("How many hours will the store be open?\n(16 hours and 30 minutes would be 16.5)\n")
+            Console.WriteLine("How many hours will the store be open?\n(16 hours and 30 minutes would be 16.5)\n");
+
             try
             {
-                TimeOpen = Console.ReadLine();
-                if(TimeOpen <= 0)
+                TimeOpen = Convert.ToDouble(Console.ReadLine());
+                if (TimeOpen <= 0)
                 {
                    TimeOpen = 0;
                    Console.WriteLine("Invalid Input. Please enter a number greater than 0. ");
@@ -93,8 +94,8 @@ namespace _2210_AustinSydnieKinslee_Project4
             Console.WriteLine("How many registers will there be?\n");
             try
             {
-                NumOfRegisters = Console.ReadLine();
-                if(NumOfRegisters <= 0)
+                NumOfRegisters = Convert.ToInt32(Console.ReadLine());
+                if (NumOfRegisters <= 0)
                 {
                    NumOfRegisters = 0;
                    Console.WriteLine("Invalid Input. Please enter a number greater than 0. ");
@@ -106,13 +107,13 @@ namespace _2210_AustinSydnieKinslee_Project4
             }
         }
 
-        private static void GetChekoutTime()
+        private static void GetCheckoutTime()
         {
             Console.Clear();
             Console.WriteLine("What is the expected checkout duration in minutes?\n(5 minutes and 30 seconds would be 5.5)\n");
             try
             {
-                ExpectedCheckoutTime = Console.ReadLine();
+                ExpectedCheckoutTime = Convert.ToDouble(Console.ReadLine());
                 if(ExpectedCheckoutTime <= 0)
                 {
                    ExpectedCheckoutTime = 0;
@@ -127,7 +128,7 @@ namespace _2210_AustinSydnieKinslee_Project4
         private static void RunSimulation()
         {
             Console.Clear();
-            if(NumOfRegisters = 0 && NumOfCustomers = 0 && TimeOpen = 0 && ExpectedCheckoutTime = 0)
+            if(NumOfRegisters == 0 || NumOfCustomers == 0 || TimeOpen == 0 || ExpectedCheckoutTime == 0)
             {
                 Console.WriteLine("You need to set the number of customers, number of registers, hours open, and expected time to check out before" + 
                     "the simulation can be ran.");
