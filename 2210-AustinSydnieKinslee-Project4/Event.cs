@@ -11,7 +11,7 @@ namespace _2210_AustinSydnieKinslee_Project4
 {
     enum EVENTTYPE { ENTER, LEAVE };
 
-    class Event : IComparable
+    public class Event : IComparable
     {
         public EVENTTYPE Type { get; set; }
         public int Time { get; set; }
