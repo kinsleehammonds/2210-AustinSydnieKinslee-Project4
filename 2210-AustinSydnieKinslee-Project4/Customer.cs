@@ -24,7 +24,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             DecideTimes();
         }
 
-        public void DecideTimes(int timeOpen)
+        public void DecideTimes(int secondsOpen)
         {
             ArrivalTime = rand.Next(secondsOpen) + 28800;
             TimeToBeServed = Convert.ToInt32(NegExp(345 - 120));

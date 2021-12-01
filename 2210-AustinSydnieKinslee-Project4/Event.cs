@@ -4,32 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataStructuresProject4
+/// <summary>
+/// khgkhhk
+/// </summary>
+namespace _2210_AustinSydnieKinslee_Project4
 {
     enum EVENTTYPE { ENTER, LEAVE };
+
     class Event : IComparable
     {
         public EVENTTYPE Type { get; set; }
-        public DateTime Time { get; set; }
-        public int Customer { get; set; }
+        public int Time { get; set; }
+        public Customer Customer { get; set; }
 
-        public Event()
-        {
-            Type = EVENTTYPE.ENTER;
-            Time = DateTime.Now;
-            Customer = -1;
-        }
-
-        public Event(EVENTTYPE type, DateTime time, int customer)
+        public Event(EVENTTYPE type, int time, Customer customer)
         {
             Type = type;
             Time = time;
             Customer = customer;
-        }
-
-        public override string ToString()
-        {
-            return string.Format("Customer {0} {1}s at {2}", Customer, Type, Time);
         }
 
         public int CompareTo(Object obj)
