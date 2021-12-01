@@ -4,9 +4,11 @@ using System.Text;
 
 namespace _2210_AustinSydnieKinslee_Project4
 {
-    public class Customer
+    public class Customer : IEquatable
     {
         Random rand = new Random();
+
+        public int ID { get; set; }
         public int ArrivalTime { get; set; }
         public int TimeToBeServed { get; set; }
         public int RegisterNumber { get; set; }
@@ -28,7 +30,7 @@ namespace _2210_AustinSydnieKinslee_Project4
 
         public void DecideTimes()
         {
-            int secondsOpen = HoursOpen * 3600
+            int secondsOpen = HoursOpen * 3600;
             ArrivalTime = rand.Next(secondsOpen) + 28800;
             TimeToBeServed = Convert.ToInt32(NegExp(345 - 120));
 
@@ -39,6 +41,26 @@ namespace _2210_AustinSydnieKinslee_Project4
 
             return -ExpectedValue * Math.Log(rand.NextDouble(), Math.E);
 
+        }
+
+        public bool Equals(Customer other)
+        {
+            return this.ID.Equals(other.ID);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return base.Equals(obj);
+            if (!(obj is Customer))
+                throw new ArgumentException("");
+
+            return Equals(obj as Customer);
+        }
+
+        public override int GetHashCode()
+        {
+            return ID.GetHashCode();
         }
 
         //it's not a lot but I can't figure out what else it might need
