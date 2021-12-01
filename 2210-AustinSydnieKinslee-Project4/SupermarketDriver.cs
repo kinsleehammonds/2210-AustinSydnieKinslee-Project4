@@ -6,8 +6,7 @@ namespace _2210_AustinSydnieKinslee_Project4
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            
         }
     }
 }

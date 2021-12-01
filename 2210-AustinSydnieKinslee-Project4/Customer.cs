@@ -33,7 +33,7 @@ namespace _2210_AustinSydnieKinslee_Project4
 
         public void DecideTimes()
         {
-            if(HoursOpen > 24)
+            if(HoursOpen < 24)
             {
                 int secondsOpen = HoursOpen * 3600;
                 int secondsExpectedTimeToBeServed = ExpectedTimeToBeServed * 3600;
