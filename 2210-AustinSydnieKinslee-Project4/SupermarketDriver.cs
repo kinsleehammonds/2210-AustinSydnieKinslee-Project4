@@ -18,15 +18,20 @@ using System;
 /// </summary>
 namespace _2210_AustinSydnieKinslee_Project4
 {
+
     /// <summary>
     /// The driver which runs all user input
     /// </summary>
     public class SupermarketDriver
     {
-        public static double TimeOpen = 0;
-        public static double ExpectedCheckoutTime = 0;
-        public static int NumOfCustomers = 0;
-        public static int NumOfRegisters = 0;
+        //all helping properties
+        private static double TimeOpen = 0;
+        private static double ExpectedCheckoutTime = 0;
+        private static int NumOfCustomers = 0;
+        private static int NumOfRegisters = 0;
+
+        #region Main Driver
+
         static void Main(string[] args)
         {
             //creates a new menue and adds all the choices
@@ -70,7 +75,11 @@ namespace _2210_AustinSydnieKinslee_Project4
             Environment.Exit(0);                    //exits the program
 
         }//end driver 
-            
+
+        #endregion
+
+        #region Methods Called From Driver
+
         /// <summary>
         /// Validates the input to make sure no incorrect input could be put in
         /// </summary>
@@ -308,6 +317,8 @@ namespace _2210_AustinSydnieKinslee_Project4
             }//end if else
 
         }//end RunSimulation
+
+        #endregion
 
     }//end SupermarketDriver
 
