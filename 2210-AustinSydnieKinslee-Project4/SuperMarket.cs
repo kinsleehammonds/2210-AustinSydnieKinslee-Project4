@@ -297,6 +297,8 @@ namespace _2210_AustinSydnieKinslee_Project4
 
         #endregion
 
+        #region Running Supermarket Method
+
         /// <summary>
         /// Runs the whole supermarket to allow the driver just to call this method
         /// </summary>
@@ -326,6 +328,8 @@ namespace _2210_AustinSydnieKinslee_Project4
             Console.ReadKey();                              
 
         }//end RunSupermarket
+
+        #endregion
 
     }//end SuperMarket
 
