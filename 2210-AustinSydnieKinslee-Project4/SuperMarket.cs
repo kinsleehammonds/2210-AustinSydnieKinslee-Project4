@@ -321,8 +321,11 @@ namespace _2210_AustinSydnieKinslee_Project4
             int avg = Convert.ToInt32(Average /= customers.Count);
 
             //Writes the average, if the lines exceeded 2 and the min and max values
-            Console.WriteLine("\nAverage: {0}. Did lines exceed 2: {1}.", ConvertMinutes(avg), Flag);
-            Console.WriteLine("Min: {0}, Max: {1}", ConvertMinutes(Min), ConvertMinutes(Max));
+            Console.WriteLine("\nAverage Time: {0}. Did lines exceed 2: {1}.", ConvertMinutes(avg), Flag);
+            Console.WriteLine("Min Time: {0}, Max Time: {1}", ConvertMinutes(Min), ConvertMinutes(Max));
+            string str = "All Average, Min, and Max times are in minutes and seconds.";
+            Console.SetCursorPosition(Console.WindowWidth - str.Length, Console.WindowHeight - 5); ;
+            Console.WriteLine(str);
 
             //allows the user to read what on the console
             Console.ReadKey();                              
