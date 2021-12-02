@@ -22,7 +22,7 @@ namespace _2210_AustinSydnieKinslee_Project4
     /// </summary>
     public class Menu
     {
-        private	List<string> Items = new List<string> ( );
+        private readonly List<string> Items = new List<string> ( );
         public string Title { get; set; }
 
         #region Constructor

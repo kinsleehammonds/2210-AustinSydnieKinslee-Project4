@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //	Solution/Project:  Project 4 - SuperMarket Simulation
-//	File Name:         PriorityQueue.cs
+//	File Name:         IPriorityQueue.cs
 //	Description:       Contains to calsses and enum and regular Event class. 
 //	Course:            CSCI 2210 - Data Structures	
 //	Author:            Austin Hamilton, hamiltonaj@etsu.edu, Dept. of Computing, East Tennessee State University

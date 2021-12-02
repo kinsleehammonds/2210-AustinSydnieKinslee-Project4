@@ -36,9 +36,9 @@ namespace _2210_AustinSydnieKinslee_Project4
         private double Average { get; set; }
         private int Arrivals { get; set; }
         private int Departures { get; set; }
-        private List<Customer> customers = new List<Customer>();
-        private List<Queue<Customer>> lines = new List<Queue<Customer>>();
-        private PriorityQueue<Event> events = new PriorityQueue<Event>();
+        private readonly List<Customer> customers = new List<Customer>();
+        private readonly List<Queue<Customer>> lines = new List<Queue<Customer>>();
+        private readonly PriorityQueue<Event> events = new PriorityQueue<Event>();
 
         #endregion
 
