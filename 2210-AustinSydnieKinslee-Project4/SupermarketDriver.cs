@@ -271,7 +271,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             Console.Clear();
 
             //if any of the values are 0 
-             if(WhatValuesAreNotSet != null) 
+             if(WhatValuesAreNotSet() != null) 
             {
                 Console.WriteLine(WhatValuesAreNotSet()); //tell the user what values they need to set
                 Console.ReadKey();
