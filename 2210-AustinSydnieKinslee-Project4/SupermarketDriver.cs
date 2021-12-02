@@ -31,7 +31,10 @@ namespace _2210_AustinSydnieKinslee_Project4
         private static int NumOfRegisters = 0;
 
         #region Main Driver
-
+        /// <summary>
+        ///  Main method to run the program that allows user input and output
+        /// </summary>
+        /// <param name="args">array of strings called args</param>
         static void Main(string[] args)
         {
             //creates a new menue and adds all the choices
@@ -230,52 +233,50 @@ namespace _2210_AustinSydnieKinslee_Project4
 
         }//end GetCheckoutTime
 
+        /// <summary>
+        /// Method to return a message that tells the user if they have not set any values needed
+        /// to run the simulation
+        /// </summary>
+        /// <returns>string of what values need to be set</returns>
         public static string WhatValuesAreNotSet()
         {
             string str = null;
-            if(NumOfCustomers == 0)
+            if(NumOfCustomers == 0) //if the customer value is empty
             {
                 str += "You need to set the number of customers.\n";
             }
-            if(NumOfRegisters == 0)
+            if(NumOfRegisters == 0)//if the register value is empty
             {
                 str += "You need to set the number of registers.\n";
             }
-            if(TimeOpen == 0)
+            if(TimeOpen == 0)//if the hours the store is open is empty
             {
                 str += "You need to set the number of hours the store will be open.\n";
             }
-            if(ExpectedCheckoutTime == 0)
+            if(ExpectedCheckoutTime == 0) //if the expected checkout time is empty
             {
                 str += "You need to set the expected average checkout time for the customers.\n";
             }
 
             return str;
-        }
+        }//end method
+
         /// <summary>
         /// Validates the input to make sure no incorrect input could be put in, 
         /// if everything is good it will run the whole simulation
         /// </summary>
         private static void RunSimulation()
         {
-            string message = WhatValuesAreNotSet();
             //clears the console
             Console.Clear();
 
             //if any of the values are 0 
-            if(NumOfRegisters == 0 && NumOfCustomers == 0 && TimeOpen == 0 && ExpectedCheckoutTime == 0)
+             if(WhatValuesAreNotSet != null) 
             {
-                //tells the user that it needs the be changed
-                Console.WriteLine("You need to set the number of customers, number of registers, hours open, \nand expected time to check out before" + 
-                    "the simulation can be ran.");
+                Console.WriteLine(WhatValuesAreNotSet()); //tell the user what values they need to set
                 Console.ReadKey();
             }
-            else if(WhatValuesAreNotSet != null)
-            {
-                Console.WriteLine(WhatValuesAreNotSet());
-                Console.ReadKey();
-            }
-            else
+            else //if all the values have been entered
             {
 
                 //creates a supermarket with all the values 
