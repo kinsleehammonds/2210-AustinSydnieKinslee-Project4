@@ -246,54 +246,69 @@ namespace _2210_AustinSydnieKinslee_Project4
                 SuperMarket supermarket = new SuperMarket(NumOfCustomers, TimeOpen, NumOfRegisters, ExpectedCheckoutTime);
                 supermarket.RunSuperMarket();
 
+                //sets a boolean to get out of while loop
                 bool yes = false;
 
+                //clears the console
                 Console.Clear();
+
+                //ask user if they want a new simulation, the same one, or just to exit the program
                 Console.WriteLine("Would you like to try another simulation, keep the current simulation or, exit? " +
                     "\nType Yes (New Simulation), No (Same simulation), or Exit (Exits Program):");
+
+                //sets input to a string
                 string choice = Console.ReadLine();
 
+                //while yes is not true
                 while (!yes)
                 {
-                    if (choice.ToUpper() == "YES")
+                    if (choice.ToUpper() == "YES")      //if the choice is yes
                     {
+                        //reset all the values to default
                         NumOfRegisters = 0;
                         NumOfCustomers = 0;
                         TimeOpen = 0;
                         ExpectedCheckoutTime = 0;
 
+                        //clear the console and tell the user that everything has been reset
                         Console.Clear();
                         Console.WriteLine("All the values have been set back to 0.");
-                        yes = true;
+                        yes = true;                                                         //gets out of loop
                         Console.ReadKey();
                     }
-                    else if (choice.ToUpper() == "NO")
+                    else if (choice.ToUpper() == "NO")      //if choice is no
                     {
+                        //keeps the same values and clear the console and tell the user everything remains the same
                         Console.Clear();
                         Console.WriteLine("All the values are the same.");
                         yes = true;
                         Console.ReadKey();
                     }
-                    else if (choice.ToUpper() == "EXIT")
+                    else if (choice.ToUpper() == "EXIT")        //if choice is exit
                     {
                         Console.Clear();                        //clears the console and tell the user goodbye
                         Console.WriteLine("Goodbye!");
-                        yes = true;
+                        yes = true;                             //stops loop
                         Console.ReadKey();
                         Environment.Exit(0);                    //exits the program
                         
                     }
-                    else
+                    else            //invalid data input
                     {
+                        //tells the user to try again (keeps looping until the user puts in valid data
                         Console.Clear();
                         Console.WriteLine("Invalid response. Please type: Yes, No, or Exit.");
                         Console.ReadKey();
-                        yes = false;
+                        yes = false;            //keeps looping
 
-                    }
+                    }//end if else
                     
-                }
-            }
-        }
-    }
-}
+                }//end while
+
+            }//end if else
+
+        }//end RunSimulation
+
+    }//end SupermarketDriver
+
+}//end Namespace
