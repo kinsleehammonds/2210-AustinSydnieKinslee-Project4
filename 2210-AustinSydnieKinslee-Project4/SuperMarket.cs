@@ -32,6 +32,7 @@ namespace _2210_AustinSydnieKinslee_Project4
         private bool Flag { get; set; }
         private double HoursOpen { get; set; }
         private double ExpectedTimeToBeServed { get; set; }
+        public int NumOfCustomers { get; set; }
         private double Average { get; set; }
         private int Arrivals { get; set; }
         private int Departures { get; set; }
@@ -60,9 +61,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             HoursOpen = 16;
             Arrivals = 0; 
             Departures = 0;
-
-            //Generating all the customer
-            GenerateCustomers(100);
+            NumOfCustomers = 100;
 
             //adding the queues to the list
             for (int i = 0; i < 2; i++)
@@ -88,7 +87,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             Flag = false;
 
             //Setting all the values to input by the user
-            GenerateCustomers(numOfCustomers);
+            NumOfCustomers = numOfCustomers;
             HoursOpen = hoursOpen;
             ExpectedTimeToBeServed = expectedWaitTime;
             for (int i = 0; i < numOfRegisters; i++)
@@ -103,10 +102,10 @@ namespace _2210_AustinSydnieKinslee_Project4
         /// Generates all the customers 
         /// </summary>
         /// <param name="numOfCustomer">the number of customers to be brought in</param>
-        public void GenerateCustomers(int numOfCustomer)
+        public void GenerateCustomers()
         {
             //loops through each number to generate the right amount of customers
-            for(int i = 0; i < numOfCustomer; i++)
+            for(int i = 0; i < NumOfCustomers; i++)
             {
                 //creates a new customer
                 Customer newCustomer = new Customer(HoursOpen, ExpectedTimeToBeServed, i + 1);
@@ -304,6 +303,7 @@ namespace _2210_AustinSydnieKinslee_Project4
         /// </summary>
         public void RunSuperMarket()
         {
+            GenerateCustomers();
             AddEvents();                //adds all the events to the priority queue
 
             //while there is still events
