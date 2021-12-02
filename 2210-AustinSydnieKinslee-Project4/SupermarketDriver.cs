@@ -38,7 +38,7 @@ namespace _2210_AustinSydnieKinslee_Project4
                         Console.Clear();
                         Console.WriteLine("Goodbye!");
                         Console.ReadKey();
-                        Enviornment.Exit(0);
+                        Environment.Exit(0);
                         break;
                 }
 

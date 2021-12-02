@@ -115,50 +115,72 @@ namespace _2210_AustinSydnieKinslee_Project4
         }//end GenerateCustomers
 
         /// <summary>
-        /// 
+        /// Adds the events and typer of events to the events priority queue
         /// </summary>
         public void AddEvents()
         {
+            //foreach of the customers in the customers list
             foreach(Customer c in customers)
             {
+                //creates new events and setting the customers arrival time to the enter event
                 Event arrival = new Event(EVENTTYPE.ENTER, c.ArrivalTime, c);
-                Event leave = new Event(EVENTTYPE.LEAVE, c.ArrivalTime + c.TimeToBeServed, c);
-                events.Enqueue(arrival);
+                Event leave = new Event(EVENTTYPE.LEAVE, c.ArrivalTime + c.TimeToBeServed, c);      //arrival + how long the 
+                                                                                                    //customer will take to be served
+                events.Enqueue(arrival);               //add events to priority queue
                 events.Enqueue(leave);
-            }
-        }
 
+            }//end foreach
+
+        }//end AddEvents
+
+
+        /// <summary>
+        /// Handles the enter and leave events
+        /// </summary>
+        /// <param name="e"></param>
         public void HandleEvent(Event e)
         {
-            int line = 0;
+            int line = 0;               //sets an property to a starter value
 
+            //if the event is an enter typer
             if(e.Type == EVENTTYPE.ENTER)
             {
+                //adds 1 to the arrivals 
                 Arrivals++;
+
+                //for all the registers
                 for(int i = 0; i < lines.Count; i++)
                 {
+                    //if the current register is less than the line register
                     if (lines[i].Count < lines[line].Count)
-                        line = i;
-                }
+                        line = i;                               //set line to the current register 
+                                                                //allowing the user to get in the line with the stotest line
+                }//end for loop
 
-                lines[line].Enqueue(e.Customer);
-                e.Customer.RegisterNumber = line;
+                lines[line].Enqueue(e.Customer);            //gets that queue and puts a customer into it
+                e.Customer.RegisterNumber = line;           //sets the register number of that customer to the line number
 
+                //if the line count is greater than 3
                 if (lines[line].Count > 2)
-                    Flag = true;
+                    Flag = true;                    //flag this so the user knows it should be changed
 
-                if (LongestLine == 0)
+                if (LongestLine == 0)               //if the longest line is 0 add 1
                     LongestLine++;
-                else if (lines[line].Count > LongestLine)
-                    LongestLine = lines[line].Count;
+                else if (lines[line].Count > LongestLine)   //else the longest line is less than the current line
+                    LongestLine = lines[line].Count;         //resert the longest line
 
             }
             else
             {
+                //add 1 to departures
                 Departures++;
+
+                //if the count of the current line is equal to 1
                 if(lines[e.Customer.RegisterNumber].Count == 1)
                 {
+                    //dequeue that customer and store them in a holder value
                     Customer lineCustomer = lines[e.Customer.RegisterNumber].Dequeue();
+
 
                     if (Min == 0 || Min > lineCustomer.TimeToBeServed)
                         Min = lineCustomer.TimeToBeServed;
