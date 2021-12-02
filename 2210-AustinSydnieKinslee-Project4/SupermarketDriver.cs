@@ -128,7 +128,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             //try catch
             try
             {
-                //converst the input into a double to be used
+                //converts the input into a double to be used
                 TimeOpen = Convert.ToDouble(Console.ReadLine());
 
                 //if that input is less than 0
@@ -230,22 +230,49 @@ namespace _2210_AustinSydnieKinslee_Project4
 
         }//end GetCheckoutTime
 
+        public static string WhatValuesAreNotSet()
+        {
+            string str = null;
+            if(NumOfCustomers == 0)
+            {
+                str += "You need to set the number of customers.\n";
+            }
+            if(NumOfRegisters == 0)
+            {
+                str += "You need to set the number of registers.\n";
+            }
+            if(TimeOpen == 0)
+            {
+                str += "You need to set the number of hours the store will be open.\n";
+            }
+            if(ExpectedCheckoutTime == 0)
+            {
+                str += "You need to set the expected average checkout time for the customers.\n";
+            }
+
+            return str;
+        }
         /// <summary>
         /// Validates the input to make sure no incorrect input could be put in, 
         /// if everything is good it will run the whole simulation
         /// </summary>
         private static void RunSimulation()
         {
-
+            string message = WhatValuesAreNotSet();
             //clears the console
             Console.Clear();
 
             //if any of the values are 0 
-            if(NumOfRegisters == 0 || NumOfCustomers == 0 || TimeOpen == 0 || ExpectedCheckoutTime == 0)
+            if(NumOfRegisters == 0 && NumOfCustomers == 0 && TimeOpen == 0 && ExpectedCheckoutTime == 0)
             {
                 //tells the user that it needs the be changed
                 Console.WriteLine("You need to set the number of customers, number of registers, hours open, \nand expected time to check out before" + 
                     "the simulation can be ran.");
+                Console.ReadKey();
+            }
+            else if(WhatValuesAreNotSet != null)
+            {
+                Console.WriteLine(WhatValuesAreNotSet());
                 Console.ReadKey();
             }
             else
