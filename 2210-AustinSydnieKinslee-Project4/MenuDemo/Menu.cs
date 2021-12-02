@@ -8,6 +8,7 @@
 //	Author:            Don Bailes, bailes@etsu.edu, Dept. of Computing, East Tennessee State University
 //	Created:           Monday, February 23, 2015
 //	Copyright:         Don Bailes, 2015
+//  Edits:             Austin Hamilton, Sydnie Dery, Kinslee Hammonds
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -15,6 +16,9 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// The namespace of the project
+/// </summary>
 namespace _2210_AustinSydnieKinslee_Project4
 {
     /// <summary>
@@ -74,14 +78,14 @@ namespace _2210_AustinSydnieKinslee_Project4
             str = DateTime.Today.ToLongDateString ( );
             Console.SetCursorPosition (Console.WindowWidth - str.Length, 0);
             Console.WriteLine (str);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.White;                       //Edited to be White. Kinslee Hammonds, 2021
 
             Console.WriteLine ("\n\n\t   " + Title);
             Console.Write ("\t   ");
             for (int n = 0; n < Title.Length; n++)
                 Console.Write ("-");
             Console.WriteLine ("\n");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.White;                       //Edited to be White. Kinslee Hammonds, 2021
             for (int n = 0; n < Items.Count; n++)
                 Console.WriteLine ("\t{0}. {1}", (n + 1), Items [n]);
         }
@@ -101,9 +105,9 @@ namespace _2210_AustinSydnieKinslee_Project4
             {
                 Display ( );
                 Console.Write ("\n\t   Type the number of your choice from the menu: ");
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.White;                                   //Edited to be White. Kinslee Hammonds, 2021
                 line = Console.ReadLine ( );
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.White;                                   //Edited to be White. Kinslee Hammonds, 2021
                 if (!Int32.TryParse (line, out choice))
                 {
                     Console.WriteLine ("\n\t   Your choice is not a number between 1 and {0}.  Please try again.",
@@ -127,5 +131,7 @@ namespace _2210_AustinSydnieKinslee_Project4
             }
         }
         #endregion
-    }
-}
+
+    }//end Menu
+
+}//end Namespace
